@@ -1,0 +1,28 @@
+version: "2"
+
+linters:
+  default: standard
+  enable:
+    - bodyclose
+    - errorlint
+    - gosec
+    - misspell
+    - rowserrcheck
+    - sqlclosecheck
+  exclusions:
+    presets:
+      - comments
+      - common-false-positives
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters:
+          - gosec
+      # Quick-fix style suggestions, not defects.
+      - linters:
+          - staticcheck
+        text: "^QF"
+
+formatters:
+  enable:
+    - gofmt

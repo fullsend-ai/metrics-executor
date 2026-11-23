@@ -1,0 +1,10 @@
+.git
+.gitignore
+.golangci.yml
+bin/
+*.exe
+*.test
+*.out
+.env
+env
+*.tar

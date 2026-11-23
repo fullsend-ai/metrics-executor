@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: registry.redhat.io/rhel9/mysql-84:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: metricsconfig
+      MYSQL_USER: metricsconfig
+      MYSQL_PASSWORD: changeme
+    ports:
+      - "127.0.0.1:13306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  metrics-executor:
+    build:
+      context: .
+      dockerfile: Containerfile
+      target: workflows
+    ports:
+      - "127.0.0.1:7070:7070"
+    environment:
+      PORT: "7070"
+      DASHBOARD_DB_HOST: mysql
+      DASHBOARD_DB_PORT: "3306"
+      DASHBOARD_DB_USER: metricsconfig
+      DASHBOARD_DB_PASSWORD: changeme
+      DASHBOARD_DB_NAME: metricsconfig
+      DEVLAKE_DB_HOST: mysql
+      DEVLAKE_DB_PORT: "3306"
+      DEVLAKE_DB_USER: metricsconfig
+      DEVLAKE_DB_PASSWORD: changeme
+      DEVLAKE_DB_NAME: metricsconfig
+    depends_on:
+      mysql:
+        condition: service_healthy
