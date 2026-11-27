@@ -95,3 +95,5 @@ dependencies:
   parameter values, full result rows and response payloads are never logged —
   only parameter counts, row counts and byte counts. Sensitive HTTP headers
   are scrubbed from debug output.
+
+<!-- Test comment added to verify fullsend /fs-code functionality (issue #3). -->
