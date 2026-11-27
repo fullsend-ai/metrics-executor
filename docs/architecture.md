@@ -96,4 +96,5 @@ dependencies:
   only parameter counts, row counts and byte counts. Sensitive HTTP headers
   are scrubbed from debug output.
 
-<!-- Test comment added to verify fullsend /fs-code functionality (issue #3). -->
+<!-- Test comment added to verify fullsend functionality (issue #3).
+     Commands exercised by this test: triage, code, review, fix, prioritize. -->
